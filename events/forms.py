@@ -1,5 +1,6 @@
 from django import forms
-from .models import Event
+from .models import Event, Team
+
 
 class EventForm(forms.ModelForm):
     start_datetime = forms.DateTimeField(
@@ -36,3 +37,9 @@ class EventUpdateForm(forms.ModelForm):
             'winner',
             'result_details'
         ]
+
+
+class TeamForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['name', 'slug', 'official_name', 'abbreviation', 'country_code']

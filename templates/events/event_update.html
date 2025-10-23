@@ -5,14 +5,20 @@
 {% block head %}
     <style>
         form { display: flex; flex-direction: column; gap: 1.5em; }
-        form p { margin: 0; display: flex; flex-direction: column; gap: 0.5em; }
-        form label { font-weight: 500; color: #333; }
-        
-        form input,
-        form select,
-        form textarea {
-            padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;
-            font-family: inherit;
+        .form-row {
+            margin: 0; display: flex; flex-direction: column; gap: 0.5em;
+        }
+        .form-row label { font-weight: 500; color: #333; }
+        .form-row input, .form-row select, .form-row textarea {
+            padding: 10px; border: 1px solid #ccc; border-radius: 5px;
+            font-size: 1em; font-family: inherit;
+        }
+        .input-with-add { display: flex; align-items: center; gap: 10px; }
+        .input-with-add select { flex-grow: 1; }
+        .add-link {
+            flex-shrink: 0; background-color: #005f99; color: white;
+            padding: 10px 15px; text-decoration: none;
+            border-radius: 5px; font-weight: 500;
         }
         .form-actions {
             border-top: 1px solid #eee; padding-top: 1.5em; margin-top: 1em;
@@ -23,9 +29,7 @@
             border: none; border-radius: 5px; font-size: 1em;
             font-weight: 500; cursor: pointer;
         }
-        .form-actions a {
-            color: #555; text-decoration: none;
-        }
+        .form-actions a { color: #555; text-decoration: none; }
     </style>
 {% endblock %}
 
@@ -35,8 +39,81 @@
 
     <form method="POST">
         {% csrf_token %}
-        
-        {{ form.as_p }}
+
+        <div class="form-row">
+            {{ form.start_datetime.label_tag }}
+            {{ form.start_datetime }}
+            {{ form.start_datetime.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.status.label_tag }}
+            {{ form.status }}
+            {{ form.status.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.season.label_tag }}
+            {{ form.season }}
+            {{ form.season.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.stage.label_tag }}
+            {{ form.stage }}
+            {{ form.stage.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.home_team.label_tag }}
+            <div class="input-with-add">
+                {{ form.home_team }}
+                <a href="{% url 'events:team-create' %}?next={{ request.path }}" class="add-link">+</a>
+            </div>
+            {{ form.home_team.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.away_team.label_tag }}
+            <div class="input-with-add">
+                {{ form.away_team }}
+                <a href="{% url 'events:team-create' %}?next={{ request.path }}" class="add-link">+</a>
+            </div>
+            {{ form.away_team.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.venue.label_tag }}
+            {{ form.venue }}
+            {{ form.venue.errors }}
+        </div>
+
+        <hr>
+        <h3>Results</h3>
+
+        <div class="form-row">
+            {{ form.home_goals.label_tag }}
+            {{ form.home_goals }}
+            {{ form.home_goals.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.away_goals.label_tag }}
+            {{ form.away_goals }}
+            {{ form.away_goals.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.winner.label_tag }}
+            {{ form.winner }}
+            {{ form.winner.errors }}
+        </div>
+
+        <div class="form-row">
+            {{ form.result_details.label_tag }}
+            {{ form.result_details }}
+            {{ form.result_details.errors }}
+        </div>
         
         <div class="form-actions">
             <button type="submit">Save Changes</button>

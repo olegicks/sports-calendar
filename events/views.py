@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
-from .forms import EventForm, EventUpdateForm
-from .models import Event
+from .forms import EventForm, EventUpdateForm, TeamForm
+from .models import Event, Team
+
 
 class EventListView(ListView):
     model = Event
@@ -48,3 +49,15 @@ class EventUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('events:event-detail', kwargs={'pk': self.object.pk})
+
+
+class TeamCreateView(CreateView):
+    model = Team
+    form_class = TeamForm
+    template_name = 'events/team_create.html'
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return reverse_lazy('events:event-list')

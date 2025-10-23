@@ -24,16 +24,21 @@
             padding: 1.2em 0;
             border-bottom: 1px solid #ddd;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-
             display: flex;
             justify-content: center;
         }
 
         nav a {
-            margin: 0 1.5em;
             color: #005f99;
             text-decoration: none;
-            font-weight: 500;
+
+            font-size: 1.25em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
         }
 
         .main-content {
@@ -54,13 +59,12 @@
 <body>
 
     <nav>
-        <a href="{% url 'events:event-list' %}">Event Calendar</a>
-
+        <a href="{% url 'events:event-list' %}">📅 Event Calendar</a>
     </nav>
 
     <main class="main-content">
         {% block content %}
-            {% endblock %}
+        {% endblock %}
     </main>
 
 </body>
