@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <style>
+        .event {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin-bottom: 1em;
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .event:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .event-header { display: flex; justify-content: space-between; align-items: center; }
+        .event-header h2 { margin: 0; color: #005f99; }
+        .event-header .status { font-weight: bold; text-transform: uppercase; font-size: 0.9em; }
+        .event-details { margin-top: 1em; }
+        .event-details p { margin: 5px 0; color: #333; }
+        .event-result { margin-top: 1em; border-top: 1px dashed #eee; padding-top: 1em; }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <h1>Event Calendar</h1>
+
+    <div id="event-list">
+
+        {% if events %}
+            {% for event in events %}
+                <div class="event">
+
+                    <div class="event-header">
+                        <h2>
+                            {% if event.home_team %}{{ event.home_team.name }}{% else %}TBD{% endif %}
+                            vs
+                            {% if event.away_team %}{{ event.away_team.name }}{% else %}TBD{% endif %}
+                        </h2>
+                        <span class="status status-{{ event.status }}">{{ event.status }}</span>
+                    </div>
+
+                    <div class="event-details">
+                        <p>
+                            <strong>Date:</strong>
+                            {{ event.start_datetime|date:"l, F j, Y" }} at {{ event.start_datetime|time:"P" }}
+                        </p>
+
+                        {% if event.stage %}
+                        <p>
+                            <strong>Competition:</strong>
+                            {{ event.stage.competition.sport.name }} |
+                            {{ event.stage.competition.name }}
+                            ({{ event.stage.name }})
+                        </p>
+                        {% endif %}
+
+                        {% if event.venue %}
+                        <p>
+                            <strong>Venue:</strong>
+                            {{ event.venue.name }}
+                        </p>
+                        {% endif %}
+                    </div>
+
+                    {% if event.status == 'played' %}
+                    <div class="event-result">
+                        <p>
+                            <strong>Result:</strong>
+                            {{ event.home_goals }} - {{ event.away_goals }}
+                            (Winner: {% if event.winner %}{{ event.winner.name }}{% else %}N/A{% endif %})
+                        </p>
+                    </div>
+                    {% endif %}
+
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No events found in the calendar.</p>
+            <p>
+                (Note: Try adding some data via the
+                <a href="/admin/">admin panel</a> first.)
+            </p>
+        {% endif %}
+
+    </div>
+{% endblock %}
