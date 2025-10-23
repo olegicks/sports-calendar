@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event, Team
+from .models import Event, Team, Venue
 
 
 class EventForm(forms.ModelForm):
@@ -43,3 +43,9 @@ class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = ['name', 'slug', 'official_name', 'abbreviation', 'country_code']
+
+
+class VenueForm(forms.ModelForm):
+    class Meta:
+        model = Venue
+        fields = ['name', 'city']

@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% block title %}Update Event{% endblock %}
-
 {% block head %}
     <style>
         form { display: flex; flex-direction: column; gap: 1.5em; }
@@ -84,7 +82,10 @@
 
         <div class="form-row">
             {{ form.venue.label_tag }}
-            {{ form.venue }}
+            <div class="input-with-add">
+                {{ form.venue }}
+                <a href="{% url 'events:venue-create' %}?next={{ request.path }}" class="add-link">+</a>
+            </div>
             {{ form.venue.errors }}
         </div>
 
