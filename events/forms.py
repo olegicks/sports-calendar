@@ -18,3 +18,21 @@ class EventForm(forms.ModelForm):
             'away_team',
             'venue'
         ]
+
+
+class EventUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = [
+            'start_datetime',
+            'status',
+            'season',
+            'stage',
+            'home_team',
+            'away_team',
+            'venue',
+            'home_goals',
+            'away_goals',
+            'winner',
+            'result_details'
+        ]

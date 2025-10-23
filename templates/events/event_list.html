@@ -45,9 +45,11 @@
                 <div class="event">
                     <div class="event-header">
                         <h2>
-                            {% if event.home_team %}{{ event.home_team.name }}{% else %}TBD{% endif %}
-                            vs
-                            {% if event.away_team %}{{ event.away_team.name }}{% else %}TBD{% endif %}
+                            <a href="{% url 'events:event-detail' pk=event.pk %}" style="text-decoration: none; color: #005f99;">
+                                {% if event.home_team %}{{ event.home_team.name }}{% else %}TBD{% endif %}
+                                vs
+                                {% if event.away_team %}{{ event.away_team.name }}{% else %}TBD{% endif %}
+                            </a>
                         </h2>
                         <span class="status status-{{ event.status }}">{{ event.status }}</span>
                     </div>
