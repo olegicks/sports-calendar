@@ -1,4 +1,7 @@
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
+
+from .forms import EventForm
 from .models import Event
 
 class EventListView(ListView):
@@ -14,3 +17,10 @@ class EventListView(ListView):
             'venue',
             'winner'
         ).order_by('start_datetime')
+
+
+class EventCreateView(CreateView):
+    model = Event
+    form_class = EventForm
+    template_name = 'events/event_create.html'
+    success_url = reverse_lazy('events:event-list')

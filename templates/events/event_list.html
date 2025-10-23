@@ -24,14 +24,25 @@
 
 
 {% block content %}
-    <h1>Event Calendar</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Event Calendar</h1>
 
-    <div id="event-list">
+        <a href="{% url 'events:event-create' %}" style="
+            background-color: #005f99;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;">
+            + Add New Event
+        </a>
+    </div>
+
+    <div id="event-list" style="margin-top: 2em;">
 
         {% if events %}
             {% for event in events %}
                 <div class="event">
-
                     <div class="event-header">
                         <h2>
                             {% if event.home_team %}{{ event.home_team.name }}{% else %}TBD{% endif %}
@@ -73,14 +84,14 @@
                         </p>
                     </div>
                     {% endif %}
-
                 </div>
             {% endfor %}
         {% else %}
             <p>No events found in the calendar.</p>
             <p>
                 (Note: Try adding some data via the
-                <a href="/admin/">admin panel</a> first.)
+                <a href="/admin/">admin panel</a> first, or add a
+                <a href="{% url 'events:event-create' %}">new event</a>.)
             </p>
         {% endif %}
 
