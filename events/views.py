@@ -1,8 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
-
-from .forms import EventForm, EventUpdateForm, TeamForm, VenueForm
-from .models import Event, Team, Venue
+from .forms import EventForm, EventUpdateForm, TeamForm, VenueForm, StageForm, CompetitionForm, SportForm
+from .models import Event, Team, Venue, Stage, Competition, Sport
 
 
 class EventListView(ListView):
@@ -80,6 +79,39 @@ class VenueCreateView(CreateView):
     form_class = VenueForm
     template_name = 'events/venue_create.html'
 
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return reverse_lazy('events:event-list')
+
+
+class SportCreateView(CreateView):
+    model = Sport
+    form_class = SportForm
+    template_name = 'events/sport_create.html'
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return reverse_lazy('events:event-list')
+
+
+class CompetitionCreateView(CreateView):
+    model = Competition
+    form_class = CompetitionForm
+    template_name = 'events/competition_create.html'
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return reverse_lazy('events:event-list')
+
+
+class StageCreateView(CreateView):
+    model = Stage
+    form_class = StageForm
+    template_name = 'events/stage_create.html'
     def get_success_url(self):
         next_url = self.request.GET.get('next')
         if next_url:

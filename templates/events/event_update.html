@@ -58,7 +58,10 @@
 
         <div class="form-row">
             {{ form.stage.label_tag }}
-            {{ form.stage }}
+            <div class="input-with-add">
+                {{ form.stage }}
+                <a href="{% url 'events:stage-create' %}?next={{ request.path }}" class="add-link">+</a>
+            </div>
             {{ form.stage.errors }}
         </div>
 

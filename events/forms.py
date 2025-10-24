@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event, Team, Venue
+from .models import Event, Team, Venue, Sport, Competition, Stage
 
 
 class EventForm(forms.ModelForm):
@@ -49,3 +49,21 @@ class VenueForm(forms.ModelForm):
     class Meta:
         model = Venue
         fields = ['name', 'city']
+
+
+class SportForm(forms.ModelForm):
+    class Meta:
+        model = Sport
+        fields = ['name', 'slug']
+
+
+class CompetitionForm(forms.ModelForm):
+    class Meta:
+        model = Competition
+        fields = ['id', 'name', 'sport']
+
+
+class StageForm(forms.ModelForm):
+    class Meta:
+        model = Stage
+        fields = ['name', 'ordering', 'competition']
