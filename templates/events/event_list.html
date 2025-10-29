@@ -1,45 +1,81 @@
 {% extends "base.html" %}
 
+{% block title %}Event List{% endblock %}
+
 {% block head %}
     <style>
         .event {
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 1.5em;
-            margin-bottom: 1em;
-            transition: box-shadow 0.2s ease-in-out;
+            background: #fdfdfd; border: 1px solid #eee; border-radius: 8px;
+            padding: 1.5em; margin-bottom: 1em; transition: box-shadow 0.2s ease-in-out;
         }
-        .event:hover {
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        .event:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .event-header {
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 1em;
         }
-        .event-header { display: flex; justify-content: space-between; align-items: center; }
-        .event-header h2 { margin: 0; color: #005f99; }
-        .event-header .status { font-weight: bold; text-transform: uppercase; font-size: 0.9em; }
+        .event-header h2 { margin: 0; color: #005f99; flex-grow: 1; }
+        .event-header .status {
+            font-weight: bold; text-transform: uppercase; font-size: 0.85em;
+            color: #555; background-color: #eee; padding: 3px 8px;
+            border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+        }
         .event-details { margin-top: 1em; }
         .event-details p { margin: 5px 0; color: #333; }
         .event-result { margin-top: 1em; border-top: 1px dashed #eee; padding-top: 1em; }
+
+        .filters {
+            background: #fff; padding: 1.5em; margin-bottom: 2em;
+            border: 1px solid #ddd; border-radius: 8px;
+        }
+        .filter-controls {
+            display: flex; gap: 1.5em; align-items: center; flex-wrap: wrap;
+            margin-bottom: 1em;
+        }
+        .filter-controls > div { display: flex; align-items: center; }
+        .filters label { font-weight: 500; margin-right: 0.5em;}
+        .filters select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .filters button {
+            background-color: #005f99; color: white; padding: 8px 15px;
+            border: none; border-radius: 4px; cursor: pointer;
+        }
     </style>
 {% endblock %}
-
 
 {% block content %}
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <h1>Event Calendar</h1>
-
-        <a href="{% url 'events:event-create' %}" style="
-            background-color: #005f99;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;">
+        <a href="{% url 'events:event-create' %}" style="background-color: #005f99; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: 500;">
             + Add New Event
         </a>
     </div>
 
-    <div id="event-list" style="margin-top: 2em;">
+    <form method="GET" action="{% url 'events:event-list' %}" class="filters">
+        <div class="filter-controls">
+            <div>
+                <label for="sport">Filter by Sport:</label>
+                <select name="sport" id="sport">
+                    <option value="">All Sports</option>
+                    {% for sport_name in available_sports %}
+                        <option value="{{ sport_name }}" {% if sport_name == request.GET.sport %}selected{% endif %}>
+                            {{ sport_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
 
+            <div>
+                <label for="sort">Sort by Date:</label>
+                <select name="sort" id="sort">
+                    <option value="asc" {% if current_sort == 'asc' %}selected{% endif %}>Oldest First</option>
+                    <option value="desc" {% if current_sort == 'desc' %}selected{% endif %}>Newest First</option>
+                </select>
+            </div>
+
+            <button type="submit">Apply</button>
+        </div>
+    </form>
+
+    <div id="event-list">
         {% if events %}
             {% for event in events %}
                 <div class="event">
@@ -59,7 +95,6 @@
                             <strong>Date:</strong>
                             {{ event.start_datetime|date:"l, F j, Y" }} at {{ event.start_datetime|time:"P" }}
                         </p>
-
                         {% if event.stage %}
                         <p>
                             <strong>Competition:</strong>
@@ -68,7 +103,6 @@
                             ({{ event.stage.name }})
                         </p>
                         {% endif %}
-
                         {% if event.venue %}
                         <p>
                             <strong>Venue:</strong>
@@ -76,12 +110,11 @@
                         </p>
                         {% endif %}
                     </div>
-
                     {% if event.status == 'played' %}
                     <div class="event-result">
                         <p>
                             <strong>Result:</strong>
-                            {{ event.home_goals }} - {{ event.away_goals }}
+                            {{ event.home_goals|default:"N/A" }} - {{ event.away_goals|default:"N/A" }}
                             (Winner: {% if event.winner %}{{ event.winner.name }}{% else %}N/A{% endif %})
                         </p>
                     </div>
@@ -89,13 +122,11 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p>No events found in the calendar.</p>
+            <p>No events found{% if request.GET.sport or request.GET.sort %} matching your criteria{% endif %}.</p>
             <p>
-                (Note: Try adding some data via the
-                <a href="/admin/">admin panel</a> first, or add a
-                <a href="{% url 'events:event-create' %}">new event</a>.)
+                Try clearing the filters/sort or add a
+                <a href="{% url 'events:event-create' %}">new event</a>.
             </p>
         {% endif %}
-
     </div>
 {% endblock %}

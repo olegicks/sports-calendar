@@ -10,13 +10,34 @@ class EventListView(ListView):
     context_object_name = 'events'
 
     def get_queryset(self):
-        return Event.objects.all().select_related(
+        queryset = Event.objects.all().select_related(
             'stage__competition__sport',
             'home_team',
             'away_team',
-            'venue',
-            'winner'
-        ).order_by('start_datetime')
+            'venue'
+        )
+
+        sport_filter = self.request.GET.get('sport')
+        if sport_filter:
+            queryset = queryset.filter(stage__competition__sport__name__iexact=sport_filter)
+
+        sort_order = self.request.GET.get('sort', 'asc')
+        if sort_order == 'desc':
+            queryset = queryset.order_by('-start_datetime')
+        else:
+            queryset = queryset.order_by('start_datetime')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['available_sports'] = Event.objects.order_by(
+            'stage__competition__sport__name'
+        ).values_list(
+            'stage__competition__sport__name', flat=True
+        ).distinct()
+        context['current_sort'] = self.request.GET.get('sort', 'asc')
+        return context
 
 
 class EventCreateView(CreateView):
