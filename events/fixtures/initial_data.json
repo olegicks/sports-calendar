@@ -1,0 +1,196 @@
+[
+{
+  "model": "events.sport",
+  "pk": 1,
+  "fields": {
+    "name": "Football",
+    "slug": "football"
+  }
+},
+{
+  "model": "events.sport",
+  "pk": 2,
+  "fields": {
+    "name": "Ice Hockey",
+    "slug": "ice-hockey"
+  }
+},
+{
+  "model": "events.team",
+  "pk": 1,
+  "fields": {
+    "name": "Real Madrid",
+    "slug": "real-madrid",
+    "official_name": "Real Madrid",
+    "abbreviation": "Real Madrid",
+    "country_code": "34"
+  }
+},
+{
+  "model": "events.team",
+  "pk": 2,
+  "fields": {
+    "name": "Manchester City",
+    "slug": "manchester-city",
+    "official_name": "Manchester City",
+    "abbreviation": "Manchester",
+    "country_code": "44"
+  }
+},
+{
+  "model": "events.team",
+  "pk": 3,
+  "fields": {
+    "name": "FC Barcelona",
+    "slug": "FC-Barcelona",
+    "official_name": "FC Barcelona",
+    "abbreviation": "FC Barcelona",
+    "country_code": "34"
+  }
+},
+{
+  "model": "events.team",
+  "pk": 4,
+  "fields": {
+    "name": "Vienna Capitals",
+    "slug": "vienna-capitals",
+    "official_name": "Vienna Capitals",
+    "abbreviation": "CAP",
+    "country_code": "AUT"
+  }
+},
+{
+  "model": "events.team",
+  "pk": 5,
+  "fields": {
+    "name": "KAC Klagenfurt",
+    "slug": "kac-klagenfurt",
+    "official_name": "EC KAC Klagenfurt",
+    "abbreviation": "KAC",
+    "country_code": "AUT"
+  }
+},
+{
+  "model": "events.venue",
+  "pk": 1,
+  "fields": {
+    "name": "Manchester City",
+    "city": "Manchester"
+  }
+},
+{
+  "model": "events.venue",
+  "pk": 2,
+  "fields": {
+    "name": "Wembley Stadium",
+    "city": "Wembley"
+  }
+},
+{
+  "model": "events.venue",
+  "pk": 3,
+  "fields": {
+    "name": "Eisarena Klagenfurt",
+    "city": "Klagenfurt"
+  }
+},
+{
+  "model": "events.venue",
+  "pk": 4,
+  "fields": {
+    "name": "Allianz Stadion",
+    "city": "Vienna"
+  }
+},
+{
+  "model": "events.competition",
+  "pk": 1,
+  "fields": {
+    "name": "UEFA Champions League",
+    "sport": 1
+  }
+},
+{
+  "model": "events.competition",
+  "pk": 3,
+  "fields": {
+    "name": "ICE Hockey League",
+    "sport": 2
+  }
+},
+{
+  "model": "events.stage",
+  "pk": 1,
+  "fields": {
+    "name": "Group Stage",
+    "ordering": 0,
+    "competition": 1
+  }
+},
+{
+  "model": "events.stage",
+  "pk": 2,
+  "fields": {
+    "name": "Regular Season",
+    "ordering": 1,
+    "competition": 3
+  }
+},
+{
+  "model": "events.event",
+  "pk": 1,
+  "fields": {
+    "start_datetime": "2026-02-23T22:12:00Z",
+    "status": "played",
+    "season": 2026,
+    "stage": 1,
+    "home_team": 2,
+    "away_team": 1,
+    "venue": 1,
+    "home_goals": 1,
+    "away_goals": 2,
+    "winner": 1,
+    "result_details": "Real Madrid won!",
+    "created_at": "2025-10-23T20:12:34.695Z",
+    "updated_at": "2025-10-23T20:42:33.470Z"
+  }
+},
+{
+  "model": "events.event",
+  "pk": 2,
+  "fields": {
+    "start_datetime": "2026-02-28T15:03:00Z",
+    "status": "scheduled",
+    "season": 2026,
+    "stage": 2,
+    "home_team": 5,
+    "away_team": 4,
+    "venue": 3,
+    "home_goals": null,
+    "away_goals": null,
+    "winner": null,
+    "result_details": null,
+    "created_at": "2025-10-29T14:04:22.765Z",
+    "updated_at": "2025-10-29T14:04:22.765Z"
+  }
+},
+{
+  "model": "events.event",
+  "pk": 3,
+  "fields": {
+    "start_datetime": "2026-03-27T15:05:00Z",
+    "status": "cancelled",
+    "season": 2026,
+    "stage": 2,
+    "home_team": 4,
+    "away_team": 5,
+    "venue": 4,
+    "home_goals": null,
+    "away_goals": null,
+    "winner": null,
+    "result_details": "",
+    "created_at": "2025-10-29T14:06:21.569Z",
+    "updated_at": "2025-10-29T14:08:41.771Z"
+  }
+}
+]
