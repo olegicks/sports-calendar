@@ -34,7 +34,7 @@ This project is a complete backend solution for a sports event calendar, built a
 Follow these steps to get the project running on your local machine.
 
 ```shell
-git clone [https://github.com/olegicks/sports-calendar.git](https://github.com/olegicks/sports-calendar.git)
+git clone https://github.com/olegicks/sports-calendar.git
 cd sports-calendar
 
 # For Windows

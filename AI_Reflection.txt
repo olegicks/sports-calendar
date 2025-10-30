@@ -1,0 +1,7 @@
+The entire backend was written by me, specifically all the models, forms, views, URLs, and so on.
+I decided to use plain Django instead of a REST API because this is a fairly simple application. Also,
+just creating events seemed insufficient, as the user would have no way to make custom events; therefore,
+in my application, the user can add any field they want. I used artificial intelligence to help me with
+HTML and CSS because I thought my skills were not enough to make the site I wanted you to see. But despite this,
+I can explain every line of code in my project. If I had more time, I probably would have made the front end even
+better, but in terms of the backend, I am satisfied.
