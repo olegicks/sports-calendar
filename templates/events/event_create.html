@@ -1,44 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Create New Event{% endblock %}
-{% block head %}
-    <style>
-        form { display: flex; flex-direction: column; gap: 1.5em; }
-        .form-row {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5em;
-        }
-        .form-row label { font-weight: 500; color: #333; }
-        .form-row input, .form-row select {
-            padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;
-        }
-        .input-with-add {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .input-with-add select { flex-grow: 1; }
-        .add-link {
-            flex-shrink: 0;
-            background-color: #005f99;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-        }
-        .form-actions {
-            border-top: 1px solid #eee; padding-top: 1.5em; margin-top: 1em;
-        }
-        .form-actions button {
-            background-color: #005f99; color: white; padding: 12px 20px;
-            border: none; border-radius: 5px; font-size: 1em;
-            font-weight: 500; cursor: pointer;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
     <h1>Create a New Event</h1>
     <p>Fill out the form below to add a new event to the calendar.</p>

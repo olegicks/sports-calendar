@@ -10,7 +10,7 @@ class Sport(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
     official_name = models.CharField(max_length=255, blank=True, null=True)
     abbreviation = models.CharField(max_length=10, blank=True, null=True)
     country_code = models.CharField(max_length=3, blank=True, null=True)
@@ -20,7 +20,7 @@ class Team(models.Model):
 
 class Venue(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    city = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self): return self.name
 

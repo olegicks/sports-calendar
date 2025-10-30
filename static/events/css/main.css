@@ -1,0 +1,72 @@
+body, html {
+    margin: 0; height: 100%; font-family: "Segoe UI", Roboto, sans-serif;
+    background: #f4f7f6 url("../images/images.png") center/cover no-repeat fixed;
+    color: #333; display: flex; flex-direction: column; align-items: center;
+}
+
+nav {
+    width: 90%;
+    max-width: 1100px;
+    background: #fff;
+    padding: 2em;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+nav a {
+    color: #005f99; text-decoration: none; font-weight: 600; font-size: 1.25em;
+}
+
+.main-content {
+    width: 90%;
+    max-width: 1100px;
+    margin: 2em auto; padding: 2em;
+    background: #fff; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+.event, .detail-card {
+    background: #fff; border: 1px solid #eee; border-radius: 8px;
+    padding: 1.5em; margin-bottom: 1em; box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.event-header {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.event-header h2 a {
+    text-decoration: none; color: #005f99; margin: 0;
+}
+
+.status {
+    font-size: 0.85em; text-transform: uppercase; background: #eee;
+    padding: 3px 8px; border-radius: 4px;
+}
+
+.filters, form {
+    background: #fff; padding: 1em; border: 1px solid #ddd; border-radius: 6px;
+    margin-bottom: 2em;
+}
+
+.filters select, input, textarea {
+    padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+}
+
+button, .btn, .add-event-btn {
+    background: #005f99; color: #fff; border: none; border-radius: 4px;
+    padding: 8px 15px; cursor: pointer; text-decoration: none; font-weight: 500;
+}
+
+.btn-secondary {
+    background: #f4f7f6; color: #005f99; border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background: #e9ecef;
+}
+
+.add-link {
+    text-decoration: none;
+}
