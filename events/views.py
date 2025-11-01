@@ -14,7 +14,8 @@ class EventListView(ListView):
             'stage__competition__sport',
             'home_team',
             'away_team',
-            'venue'
+            'venue',
+            'winner'
         )
 
         sport_filter = self.request.GET.get('sport')
