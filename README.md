@@ -23,7 +23,7 @@ This project is a complete backend solution for a sports event calendar, built a
 ## 💻 Technology Stack
 
 * **Python 3.11+**
-* **Django 5.x**
+* **Django 5**
 * **Database:** SQLite3 (for development)
 * **Frontend:** Standard Django Templates (HTML/CSS)
 
